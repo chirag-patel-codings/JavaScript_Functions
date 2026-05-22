@@ -3,7 +3,7 @@ console.log("Hello World!\n==========\n");
 // Exercise 1 Section
 console.log("EXERCISE 1:\n==========\n");
 
-function printOdds(count) {
+const printOdds = count => {
 
     let i = count < 0 ? count : 0;
     let until = count < 0 ? 0 : count;
@@ -24,7 +24,7 @@ function printOdds(count) {
 // Exercise 2 Section
 console.log("EXERCISE 2:\n==========\n");
 
-function checkAge(userName, age) {
+const checkAge = (userName, age) => {       // '{' required for the function body because there are more than one statements in the scope.
 
     let message = '';
     userName = userName ? userName.trim() : '';
@@ -35,11 +35,11 @@ function checkAge(userName, age) {
         let aboveSixteen = `Congrats ${userName}, you can drive!`;
         let belowSixteen = `Sorry ${userName}, but you need to wait until you're 16.`;
 
-        if (age >= 16) {
-            message = aboveSixteen;
+        if (age < 16) {
+            message = belowSixteen;
         }
         else {
-            message = belowSixteen;
+            message = aboveSixteen;
         }
 
     }
@@ -61,7 +61,7 @@ function checkAge(userName, age) {
 
 //checkAge('test', 16);
 
-function findQuadrant(x, y) {
+const findQuadrant = (x, y) => {
     
     let message = '';
     let xyCoodinates; 
@@ -119,7 +119,7 @@ function findQuadrant(x, y) {
 // findQuadrant(1, -2); 
 
 
-function canFormTriangle(side1, side2, side3) {
+const canFormTriangle = (side1, side2, side3) => {
 
     let message = '';
 
@@ -167,7 +167,7 @@ function canFormTriangle(side1, side2, side3) {
 // canFormTriangle(12, 17, 22);
 
 
-function dataUsageStatistics(planLimit = 100, day, usage = 0) {
+const dataUsageStatistics = (planLimit = 100, day, usage = 0) => {
 
     day = (!day || day == 0) ? new Date().getDate() : day;
     // const daysInCurrentMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
@@ -175,6 +175,7 @@ function dataUsageStatistics(planLimit = 100, day, usage = 0) {
     let remainingDays = 30 - day;
     let averageDailyUsage = usage / day;
     let averageDailyPlanLimit = planLimit / 30.0;
+    let remainingAvgDailyUsageLimit = ((planLimit - usage) / remainingDays).toFixed(2);
 
     userMessage = `${day} day(s) used, ${remainingDays} day(s) remaining.\n`;
     userMessage += `Average daily use: ${averageDailyUsage.toFixed(3)} GB/day\n`;
@@ -183,12 +184,12 @@ function dataUsageStatistics(planLimit = 100, day, usage = 0) {
 
         userMessage += `You are EXCEEDING your average daily use (${averageDailyPlanLimit.toFixed(2)} GB/day),\n`;
         userMessage += `continuing this high usage, you'll exceed your data plan by\n${(Math.abs((averageDailyPlanLimit - averageDailyUsage) * 30.0)).toFixed(1)} GB.\n`;
-        userMessage += `To stay below your data plan, use no more than ${((planLimit - usage) / remainingDays).toFixed(2)} GB/day.`;
+        userMessage += `To stay below your data plan, use no more than ${remainingAvgDailyUsageLimit} GB/day.`;
 
     }
     else{
 
-        userMessage += `There are no recommendations for your existing usage!!!`;
+        userMessage += `There are no recommendations for your existing usage.\nYou may not exceed your plan limit as long as you maintain your daily average of ${remainingAvgDailyUsageLimit} GB/day for the remaining days until plan renewal.!!!`;
 
     }
     
