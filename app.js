@@ -127,7 +127,7 @@ const canFormTriangle = (side1, side2, side3) => {
 
         if ( (side1 + side2 > side3) && (side1 + side3 > side2) && (side2 + side3 > side1) ) {
             
-            // This can form a valid Triangle
+            // These can form a valid Triangle
             if ( (side1 == side2) && (side2 == side3) ) {
                 message = "This will form an EQUILATERAL Triangle!!!";
             }
